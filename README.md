@@ -15,3 +15,11 @@ Exception in thread "main" org.json.JSONException: JSONObject["waves"] not found
         at WeatherWaveApp.main(WeatherWaveApp.java:49)
 PS C:\Users\katayama\Desktop\WeatherWaveApp> 
 ```
+# 開発環境の構築手順
+- JSON In Javaライブラリが必要です。
+1. ブラウザで`https://mvnrepository.com/artifact/org.json/json/20250107`にアクセスします。
+2. `Files`セクションの`bundle`リンクをクリックして`json-20250107.jar`ファイルをダウンロードします。  
+ダウンロードが済んだら、ブラウザは閉じます。  
+⚠️注意
+ブラウザによっては「json-20250107.jarはデバイスに問題を起こす可能性があります。このまま保存しますか？」というポップアップが表示されることがあります。この場合は「保存」をクリックしてください。
+3. ダウンロードした`json-20250107.jar`を`WeatherWaveApp`フォルダに移動します。
