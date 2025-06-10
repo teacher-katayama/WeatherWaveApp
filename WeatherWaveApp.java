@@ -43,16 +43,17 @@ public class WeatherWaveApp {
                     JSONObject timeSeriesObject = rootArray.getJSONObject(0).getJSONArray("timeSeries")
                             .getJSONObject(0);
                     JSONArray timeDefines = timeSeriesObject.getJSONArray("timeDefines");
-                    JSONArray weathers = timeSeriesObject.getJSONArray("areas").getJSONObject(0)
-                            .getJSONArray("weathers");
-                    JSONArray winds = timeSeriesObject.getJSONArray("areas").getJSONObject(0).getJSONArray("winds");
-                    JSONArray waves = timeSeriesObject.getJSONArray("areas").getJSONObject(0).getJSONArray("waves");
+                    JSONArray areas = timeSeriesObject.getJSONArray("areas");
+                    JSONObject areaObj = areas.getJSONObject(0);
+                    JSONArray weathers = areaObj.has("weathers") ? areaObj.getJSONArray("weathers") : null;
+                    JSONArray winds = areaObj.has("winds") ? areaObj.getJSONArray("winds") : null;
+                    JSONArray waves = areaObj.has("waves") ? areaObj.getJSONArray("waves") : null;
                     boolean found = false;
                     for (int i = 0; i < timeDefines.length(); i++) {
                         if (timeDefines.getString(i).startsWith(today)) {
-                            String weather = toHalfWidth(weathers.getString(i));
-                            String wind = toHalfWidth(winds.getString(i));
-                            String wave = toHalfWidth(waves.getString(i));
+                            String weather = weathers != null ? toHalfWidth(weathers.getString(i)) : "天気情報なし";
+                            String wind = winds != null ? toHalfWidth(winds.getString(i)) : "風情報なし";
+                            String wave = waves != null ? toHalfWidth(waves.getString(i)) : "波の情報はありません";
                             System.out.println(
                                     "【" + areaName + "】" + weather + "。風向きは" + wind + "。波の高さは" + wave + "。");
                             found = true;
